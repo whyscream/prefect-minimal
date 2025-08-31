@@ -28,15 +28,15 @@ def fib_naive(n):
     for x in range(n):
         a, b = b, a+b
         if x % 1000 == 0:
-            print(f"Intermediate result Fibonacci number for n={x}: {a}")
+            print(f"Intermediate Fibonacci number for n={x} reached.")
     return a
 
 @flow(log_prints=True)
-def fibonacci_flow(n: int) -> int:
+def fibonacci(n: int) -> int:
     """Flow to compute the nth Fibonacci number."""
     result =  fib_naive(n)
-    print(f"The {n}th Fibonacci number is: {result}")
+   # print(f"The {n}th Fibonacci number is: {result}")
     return result
 
 if __name__ == "__main__":
-    fibonacci_flow.serve(name="fibonacci-flow")
+    fibonacci.serve()
