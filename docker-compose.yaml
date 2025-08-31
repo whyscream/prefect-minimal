@@ -44,16 +44,18 @@ services:
       start_period: 10s
     command: prefect server start --host 0.0.0.0
 
-  prefect-flows:
-    image: prefecthq/prefect:3-latest
+  prefect-worker:
+    build:
+        context: .
+        dockerfile: Dockerfile.worker
     depends_on:
       prefect-server:
         condition: service_healthy
     environment:
       PREFECT_API_URL: http://prefect-server:4200/api
     volumes:
-        - ./tasks:/opt/prefect/tasks
-    command: python tasks/_all.py
+        - ./flows:/opt/prefect/flows
+    command: python flows/_serve_flows.py
 
 volumes:
     postgres_data: {}
